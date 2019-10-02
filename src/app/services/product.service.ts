@@ -1,6 +1,6 @@
-import { Product } from './../models/product';
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {Product} from '../models/product';
+import {Injectable} from '@angular/core';
+import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 
 
 @Injectable({
@@ -8,35 +8,36 @@ import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 })
 export class ProductService {
 
- productList: AngularFireList<any>;
- selectedProduct: Product = new Product();
+  productList: AngularFireList<any>;
+  selectedProduct: Product = new Product();
 
-  constructor(private firebase: AngularFireDatabase) { }
+  constructor(private firebase: AngularFireDatabase) {
+  }
 
-    getProduct() {
-     return this.productList = this.firebase.list('products')
-    }
+  getProduct() {
+    return this.productList = this.firebase.list('products');
+  }
 
-    insterProduct(product: Product) {
-      this.productList.push({
-        name: product.name,
-        category: product.cartegory,
-        location: product.location,
-        price: product.price
-      });
-    }
+  insertProduct(product: Product) {
+    this.productList.push({
+      name: product.name,
+      category: product.category,
+      location: product.location,
+      price: product.price
+    });
+  }
 
-    updateProduct(product: Product) {
-      this.productList.update(product.$key,{
-        name: product.name,
-        category: product.cartegory,
-        location: product.location,
-        price: product.price
-      });
-    }
+  updateProduct(product: Product) {
+    this.productList.update(product.$key, {
+      name: product.name,
+      category: product.category,
+      location: product.location,
+      price: product.price
+    });
+  }
 
-    deleteProduct($key: string) {
-      this.productList.remove($key);
-    }
+  deleteProduct($key: string) {
+    this.productList.remove($key);
+  }
 
 }
